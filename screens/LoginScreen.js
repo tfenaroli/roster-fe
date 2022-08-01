@@ -78,9 +78,9 @@ const styles = StyleSheet.create({
 	},
 
 	title: {
+		marginBottom: 100,
 		fontSize: 40,
 		fontWeight: 'bold',
-		marginBottom: 80,
 	},
 
 	inputContainer: {
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
 		marginTop: 40,
 	},
 	button: {
-		backgroundColor: '#0782F9',
+		backgroundColor: 'rgb(205, 92, 92)',
 		width: '100%',
 		padding: 15,
 		borderRadius: 10,
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
 	buttonOutline: {
 		backgroundColor: '#FFF',
 		marginTop: 5,
-		borderColor: '#0782F9',
+		borderColor: 'rgb(205, 92, 92)',
 		borderWidth: 2
 	},
 	buttonText: {
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
 		fontSize: 16
 	},
 	buttonOutlineText: {
-		color: '#0782F9',
+		color: 'rgb(205, 92, 92)',
 		fontWeight: '700',
 		fontSize: 16
 	}

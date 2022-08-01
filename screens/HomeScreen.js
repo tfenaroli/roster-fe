@@ -74,7 +74,7 @@ const HomeScreen = () => {
 					/>
 				}>
 					{users.map((user) =>
-						<User firstName={user.firstName} lastName={user.lastName} id={user._id} key={user._id} />
+						<User user={user} key={user._id} />
 					)}
 				</ScrollView>
 			</View>
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
 	},
 
 	button: {
-		backgroundColor: '#0782F9',
+		backgroundColor: 'rgb(205, 92, 92)',
 		width: '40%',
 		padding: 15,
 		borderRadius: 10,
@@ -115,14 +115,15 @@ const styles = StyleSheet.create({
 	},
 
 	buttonOutline: {
+		position: 'absolute',
 		backgroundColor: '#FFF',
-		marginTop: 20,
-		borderColor: '#0782F9',
+		bottom: 20,
+		borderColor: 'rgb(205, 92, 92)',
 		borderWidth: 2
 	},
 
 	buttonOutlineText: {
-		color: '#0782F9',
+		color: 'rgb(205, 92, 92)',
 		fontWeight: '700',
 		fontSize: 16
 	},

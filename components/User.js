@@ -1,9 +1,12 @@
 import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/core';
 import axios from 'axios';
 import React from 'react';
 
 const User = (props) => {
+
+	const navigation = useNavigation()
 
 	const deleteUser = (id) => {
 		console.log("deleting user with id: " + id);
@@ -13,12 +16,12 @@ const User = (props) => {
 	};
 
 	return (
-		<View style={styles.user}>
-			<Text style={styles.userText}>{props.firstName} {props.lastName}</Text>
-			<TouchableOpacity onPress={() => deleteUser(props.id)}>
+		<TouchableOpacity style={styles.user} onPress={() => navigation.navigate("Edit", props.user)}>
+			<Text style={styles.userText}>{props.user.firstName} {props.user.lastName}</Text>
+			<TouchableOpacity onPress={() => deleteUser(props.user._id)}>
 				<Ionicons name="md-trash-outline" size={24} color="red" />
 			</TouchableOpacity>
-		</View>
+		</TouchableOpacity>
 	)
 }
 
