@@ -13,7 +13,7 @@ const HomeScreen = () => {
 
 	const getUsers = () => {
 		setRefreshing(true);
-		axios.get("http://localhost:8000/")
+		axios.get("https://blooming-crag-81802.herokuapp.com/")
 			.then((res) => {
 				setRefreshing(false);
 				console.log("retrieved users");
@@ -24,7 +24,7 @@ const HomeScreen = () => {
 
 	const createUser = () => {
 		console.log("creating user with name: " + firstName + " " + lastName);
-		axios.post("http://localhost:8000/", {
+		axios.post("https://blooming-crag-81802.herokuapp.com/", {
 			firstName,
 			lastName,
 		})

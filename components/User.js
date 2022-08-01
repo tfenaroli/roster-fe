@@ -8,7 +8,7 @@ const User = (props) => {
 	const deleteUser = (id) => {
 		console.log("deleting user with id: " + id);
 		axios
-			.delete("http://localhost:8000/" + id)
+			.delete("https://blooming-crag-81802.herokuapp.com/" + id)
 			.catch(err => console.log(err))
 	};
 
