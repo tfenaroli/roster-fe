@@ -1,12 +1,14 @@
-import { TouchableOpacity, TextInput, KeyboardAvoidingView, StyleSheet, Text, View } from 'react-native'
+import { Modal, TouchableOpacity, TextInput, KeyboardAvoidingView, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { auth } from "../firebase"
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/core';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 
 const LoginScreen = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [modalVisible, setModalVisible] = useState(false);
 
 	const navigation = useNavigation()
 
@@ -20,6 +22,7 @@ const LoginScreen = () => {
 	}, [])
 
 	const handleRegister = () => {
+		setModalVisible(false)
 		createUserWithEmailAndPassword(auth, email, password)
 			.then(userCredentials => {
 				const user = userCredentials.user;
@@ -45,12 +48,14 @@ const LoginScreen = () => {
 				<TextInput
 					style={styles.input}
 					placeholder="Email"
+					placeholderTextColor="#808080"
 					value={email}
 					onChangeText={text => setEmail(text)}
 				/>
 				<TextInput
 					style={styles.input}
 					placeholder="Password"
+					placeholderTextColor="#808080"
 					secureTextEntry
 					value={password}
 					onChangeText={text => setPassword(text)}
@@ -60,10 +65,48 @@ const LoginScreen = () => {
 				<TouchableOpacity style={styles.button} onPress={handleLogin}>
 					<Text style={styles.buttonText}>Login</Text>
 				</TouchableOpacity>
-				<TouchableOpacity style={[styles.button, styles.buttonOutline]} onPress={handleRegister}>
-					<Text style={styles.buttonOutlineText}>Register</Text>
+				<TouchableOpacity style={[styles.button, styles.buttonOutline]} onPress={() => setModalVisible(true)}>
+					<Text style={styles.buttonOutlineText}>Sign Up</Text>
 				</TouchableOpacity>
 			</View>
+			<Modal
+				animationType="slide"
+				visible={modalVisible}
+			>
+				<KeyboardAvoidingView
+					style={styles.container}
+					behavior="padding">
+					<TouchableOpacity
+						style={styles.backButton}
+						onPress={() => setModalVisible(false)}
+					>
+						<Ionicons name="caret-down" size={40} color="#808080" />
+					</TouchableOpacity>
+					<Text style={styles.title}>Sign Up</Text>
+					<View style={styles.inputContainer}>
+						<TextInput
+							style={styles.input}
+							placeholder="Email"
+							placeholderTextColor="#808080"
+							value={email}
+							onChangeText={text => setEmail(text)}
+						/>
+						<TextInput
+							style={styles.input}
+							placeholder="Password"
+							placeholderTextColor="#808080"
+							secureTextEntry
+							value={password}
+							onChangeText={text => setPassword(text)}
+						/>
+					</View>
+					<View style={styles.buttonContainer}>
+						<TouchableOpacity style={styles.button} onPress={handleRegister}>
+							<Text style={styles.buttonText}>Sign Up</Text>
+						</TouchableOpacity>
+					</View>
+				</KeyboardAvoidingView>
+			</Modal>
 		</KeyboardAvoidingView>
 	)
 }
@@ -72,6 +115,7 @@ export default LoginScreen
 
 const styles = StyleSheet.create({
 	container: {
+		backgroundColor: '#FFF',
 		justifyContent: 'center',
 		alignItems: 'center',
 		flex: 1
@@ -86,19 +130,33 @@ const styles = StyleSheet.create({
 	inputContainer: {
 		width: '80%',
 	},
+
 	input: {
-		backgroundColor: 'white',
+		backgroundColor: 'rgb(230, 230, 230)',
 		paddingHorizontal: 15,
 		paddingVertical: 10,
 		borderRadius: 10,
 		marginTop: 5,
 	},
+
 	buttonContainer: {
 		width: '60%',
 		justifyContent: 'center',
 		alignItems: 'center',
 		marginTop: 40,
 	},
+
+	backButton: {
+		position: 'absolute',
+		top: 60,
+		// left: 10,
+		// backgroundColor: 'rgb(205, 92, 92)',
+		width: '20%',
+		padding: 15,
+		borderRadius: 10,
+		alignItems: 'center'
+	},
+
 	button: {
 		backgroundColor: 'rgb(205, 92, 92)',
 		width: '100%',
