@@ -25,7 +25,6 @@ expo start
 
 * Contact Thomas Fenaroli at thomas.s.fenaroli.24@dartmouth.edu
 
-
 ## Authors
 
 Contributor's name and contact info
